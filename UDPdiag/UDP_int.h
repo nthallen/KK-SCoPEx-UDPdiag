@@ -2,7 +2,13 @@
 #define UDP_INT_H_INCLUDED
 #include <stdint.h>
 #include "dasio/interface.h"
+#include "dasio/client.h"
+#include "dasio/tm_tmr.h"
 #include "UDPdiag.h"
+
+extern bool allow_remote_commands;
+extern const char *remote_ip, *rx_port, *tx_port;
+void UDPdiag_init_options(int argc, char **argv);
 
 typedef struct __attribute__((packed)) {
   uint16_t Command_bytes;
@@ -36,23 +42,27 @@ typedef struct __attribute__((packed)) {
 
 class UDP_interface : public DAS_IO::Interface {
   public:
-    UDP_interface(const char *name, int bufsz);
+    inline UDP_interface(const char *name, int bufsz) :
+      DAS_IO::Interface(name, bufsz) {}
   protected:
     uint16_t crc_calc(uint8_t *buf, int len);
     int32_t get_timestamp();
 };
 
-class UDP_transmitter : public DAS_IO::Interface {
+class UDP_tmr;
+class UDP_receiver;
+
+class UDP_transmitter : public UDP_interface {
   public:
-    UDP_transmitter(const char *hostname, int port, UDP_tmr *tmr);
-    bool parse_command(const char *cmd, unsigned cmdlen);
+    UDP_transmitter(const char *rmt_ip, const char *rmt_port,
+      UDP_tmr *tmr);
+    bool parse_command(char *cmd, unsigned cmdlen);
     bool transmit(uint16_t n_pkts);
-    inline void set_receiver(UDP_receiver *rx) { this->rx = rx; }
+    // inline void set_receiver(UDP_receiver *rx) { this->rx = rx; }
   protected:
-    bool protocol_timeout();
     bool tm_sync();
     void crc_set();
-    UDP_diag_packet *pkt;
+    UDPdiag_packet *pkt;
     uint32_t L2R_Int_packets_tx;
     uint32_t L2R_Int_bytes_tx;
     uint32_t Int_packets_tx;
@@ -67,26 +77,26 @@ class UDP_transmitter : public DAS_IO::Interface {
     UDP_receiver *rx;
 };
 
-class UDP_receiver : public DAS_IO::Interface {
+class UDP_receiver : public UDP_interface {
   public:
-    UDP_receiver(int port, bool allow_remote_commands, UDP_transmitter *tx);
+    UDP_receiver(const char *port, bool allow_remote_commands, UDP_transmitter *tx);
   protected:
     bool protocol_input();
     bool tm_sync();
     bool crc_ok();
-    int recv_port;
+    const char *recv_port;
     bool allow_remote_commands;
     UDP_transmitter *tx;
-    UDP_diag_packet *pkt;
+    UDPdiag_packet *pkt;
     uint32_t R2L_Total_packets_rx;
     uint32_t R2L_Total_valid_packets_rx;
+    uint32_t R2L_Total_invalid_packets_rx;
     int      R2L_Int_packets_rx;
     int32_t  R2L_Int_min_latency;
     int32_t  R2L_Int_max_latency;
     uint32_t R2L_Int_bytes_rx;
     int32_t  R2L_latencies;
-    uint32_t R2L_Receive_SN;
-    uint32_t L2R_Int_packets_tx;
+    // uint32_t L2R_Int_packets_tx;
 };
 
 class UDP_cmd : public DAS_IO::Client {

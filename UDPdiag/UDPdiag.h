@@ -1,5 +1,6 @@
 #ifndef UDPDIAG_H_INCLUDED
 #define UDPDIAG_H_INCLUDED
+#include <stdint.h>
 
 /** Telemetry data
  * These measurements correspond to a particular direction,
