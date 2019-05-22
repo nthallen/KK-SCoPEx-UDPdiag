@@ -1,0 +1,41 @@
+L2R {
+  HBox { +-; Title: L2R; -+ };
+  
+  L2R_INT_PACKETS_TX:           (L2R_INT_PACKETS_TX,10)           int pkts tx;
+  L2R_INT_BYTES_TX:             (L2R_INT_BYTES_TX,10)             b tx;
+  L2R_TOTAL_PACKETS_TX:         (L2R_TOTAL_PACKETS_TX,10)         pkts tx;
+  L2R_INT_PACKETS_RX:           (L2R_INT_PACKETS_RX,10)           int pkts rx;
+  L2R_INT_MIN_LATENCY:          (L2R_INT_MIN_LATENCY,10)          ms;
+  L2R_INT_MEAN_LATENCY:         (L2R_INT_MEAN_LATENCY,10)         ms;
+  L2R_INT_MAX_LATENCY:          (L2R_INT_MAX_LATENCY,10)          ms;
+  L2R_INT_BYTES_RX:             (L2R_INT_BYTES_RX,10)             b rx;
+  L2R_TOTAL_VALID_PACKETS_RX:   (L2R_TOTAL_VALID_PACKETS_RX,10)   pkts rx;
+  L2R_TOTAL_INVALID_PACKETS_RX: (L2R_TOTAL_INVALID_PACKETS_RX,10) pkts rx;
+  L2R_RECEIVE_SN:               (L2R_RECEIVE_SN,10)               sn;
+}
+
+R2L {
+  HBox { +-; Title: R2L; -+ };
+  
+  R2L_INT_PACKETS_TX:           (R2L_INT_PACKETS_TX,10)           int pkts tx;
+  R2L_INT_BYTES_TX:             (R2L_INT_BYTES_TX,10)             b tx;
+  R2L_TOTAL_PACKETS_TX:         (R2L_TOTAL_PACKETS_TX,10)         pkts tx;
+  R2L_INT_PACKETS_RX:           (R2L_INT_PACKETS_RX,10)           int pkts rx;
+  R2L_INT_MIN_LATENCY:          (R2L_INT_MIN_LATENCY,10)          ms;
+  R2L_INT_MEAN_LATENCY:         (R2L_INT_MEAN_LATENCY,10)         ms;
+  R2L_INT_MAX_LATENCY:          (R2L_INT_MAX_LATENCY,10)          ms;
+  R2L_INT_BYTES_RX:             (R2L_INT_BYTES_RX,10)             b rx;
+  R2L_TOTAL_VALID_PACKETS_RX:   (R2L_TOTAL_VALID_PACKETS_RX,10)   pkts rx;
+  R2L_TOTAL_INVALID_PACKETS_RX: (R2L_TOTAL_INVALID_PACKETS_RX,10) pkts rx;
+  R2L_RECEIVE_SN:               (R2L_RECEIVE_SN,10)               sn;
+}
+
+Table {
+  HBox {
+    |+;
+    { [L2R];
+      [R2L]
+    };
+    |+ };
+  -;
+}
