@@ -1,0 +1,13 @@
+<package> UDPdiag
+<include> "UDP_int.h"
+<include> msg oui
+<follow> msg
+
+<opts> "cr:t:i:"
+<sort>
+  -c allow execution of remote commands
+  -i <ip_addr> specify remote system's IP address
+  -t <port> specify the remote system's UDP receive port
+  -r <port> specify the local receive port
+<init>
+  UDPdiag_init_options(argc, argv);

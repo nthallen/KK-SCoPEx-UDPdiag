@@ -14,11 +14,12 @@
 #include "nl.h"
 #include "nl_assert.h"
 #include "oui.h"
+#include "crc16modbus.h"
 
 DAS_IO::AppID_t DAS_IO::AppID("UDPdiag", "UDP Performance Diagnostic Tool", "V1.0");
 
 uint16_t UDP_interface::crc_calc(uint8_t *buf, int len) {
-  return 0; // ###
+  return crc16modbus_word(0, (void const *)buf, len);
 }
 
 int32_t UDP_interface::get_timestamp() {
