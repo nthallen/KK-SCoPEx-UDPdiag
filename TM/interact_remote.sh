@@ -1,9 +1,14 @@
 #! /bin/bash
 
-export Experiment=UDP
+export Experiment=UDPrmt
 launch_error=''
 VERBOSE=''
 memoname=/var/run/linkeng/$Experiment/memo
+
+[ -f VERSION ] || nl_error Missing VERSION File
+VERSION=`cat VERSION`
+[ -d "bin/$VERSION" ] || nl_error "Missing bin directory bin/$VERSION"
+export PATH=bin/$VERSION:$PATH
 
 function waitfor {
   name=$1
@@ -75,5 +80,5 @@ Launch      -TMC-  lgr -N `mlf_find LOG`
 Dispatch_nc -      UDPdispnc -a
 Launch      tm_gen UDPcol -v
 Launch      cmd    UDPsrvr -v
-Launch      -      UDPdiag -v
+Launch      -      UDPdiag -v -i 127.0.0.1 -r 10001 -t 10000
 Dispatch_nc -      UDPcltnc

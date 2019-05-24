@@ -1,0 +1,21 @@
+Moduledef UDPdiag {
+  Comments about this driver
+}
+
+mode (default) {
+  # tmcbase = driver.tmc:driver.tmc.in
+  # cmdbase = pmc_base.cmd:pmc_base.cmd.in
+  # colbase = driver_col.tmc:driver_col.tmc.in
+  # genuibase = driver.genui
+  # - : driver.tbl:driver.tbl.in
+  DISTRIB = @MODDIR@/../UDPdiag
+  CPPFLAGS = -I @MODDIR@/..
+  %%
+.PHONY : all-UDPdiag clean-UDPdiag
+all-dist : all-UDPdiag
+all-UDPdiag :
+	cd @MODDIR@/.. && make
+clean-dist : clean-UDPdiag
+clean-UDPdiag :
+	cd @MODDIR@/.. && make clean
+}

@@ -1,30 +1,76 @@
-TM typedef uint32_t INT_PACKETS_t { text "%7.3lf"; }
-TM typedef uint32_t INT_BYTES_t { text "%7.3lf"; }
+TM "Receive" UDPdiag 1;
+
+collect RD_stat {
+  RD_stat = receive_data;
+  receive_data_obj->synch();
+}
+
+TM typedef uint16_t mfc_t { text "%5u"; }
+TM typedef unsigned char UDP_Stat_t { text "%3u"; }
+
+TM typedef uint32_t INT_PACKETS_t { text "%10u"; }
+TM typedef uint32_t INT_BYTES_t { text "%10u"; }
 TM typedef int32_t LATENCY_t { text "%7.3lf"; }
-TM typedef uint32_t TOTAL_PACKETS_t { text "%7.3lf"; }
-TM typedef uint32_t TOTAL_BYTES_t { text "%7.3lf"; }
-TM typedef uint32_t RECEIVE_t { text "%7.3lf"; }
+TM typedef uint32_t TOTAL_PACKETS_t { text "%10u"; }
+TM typedef uint32_t TOTAL_BYTES_t { text "%10u"; }
+TM typedef uint32_t RECEIVE_t { text "%10u"; }
 
-TM 1 Hz INT_PACKETS_t L2R_INT_PACKETS_TX;
-TM 1 Hz INT_BYTES_t L2R_INT_BYTES_TX;
-TM 1 Hz TOTAL_PACKETS_t L2R_TOTAL_PACKETS_TX;
-TM 1 Hz INT_PACKETS_t L2R_INT_PACKETS_RX;
-TM 1 Hz LATENCY_t L2R_INT_MIN_LATENCY;
-TM 1 Hz LATENCY_t L2R_INT_MEAN_LATENCY;
-TM 1 Hz LATENCY_t L2R_INT_MAX_LATENCY;
-TM 1 Hz INT_BYTES_t L2R_INT_BYTES_RX;
-TM 1 Hz TOTAL_PACKETS_t L2R_TOTAL_VALID_PACKETS_RX;
-TM 1 Hz TOTAL_PACKETS_t L2R_TOTAL_INVALID_PACKETS_RX;
-TM 1 Hz RECEIVE_t L2R_RECEIVE_SN;
+TM 1 Hz INT_PACKETS_t L2R_Int_packets_tx;
+TM 1 Hz INT_BYTES_t L2R_Int_bytes_tx;
+TM 1 Hz TOTAL_PACKETS_t L2R_Total_packets_tx;
+TM 1 Hz INT_PACKETS_t L2R_Int_packets_rx;
+TM 1 Hz LATENCY_t L2R_Int_min_latency;
+TM 1 Hz LATENCY_t L2R_Int_mean_latency;
+TM 1 Hz LATENCY_t L2R_Int_max_latency;
+TM 1 Hz INT_BYTES_t L2R_Int_bytes_rx;
+TM 1 Hz TOTAL_PACKETS_t L2R_Total_valid_packets_rx;
+TM 1 Hz TOTAL_PACKETS_t L2R_Total_invalid_packets_rx;
+TM 1 Hz RECEIVE_t L2R_Receive_SN;
 
-TM 1 Hz INT_PACKETS_t R2L_INT_PACKETS_TX;
-TM 1 Hz INT_BYTES_t R2L_INT_BYTES_TX;
-TM 1 Hz TOTAL_PACKETS_t R2L_TOTAL_PACKETS_TX;
-TM 1 Hz INT_PACKETS_t R2L_INT_PACKETS_RX;
-TM 1 Hz LATENCY_t R2L_INT_MIN_LATENCY;
-TM 1 Hz LATENCY_t R2L_INT_MEAN_LATENCY;
-TM 1 Hz LATENCY_t R2L_INT_MAX_LATENCY;
-TM 1 Hz INT_BYTES_t R2L_INT_BYTES_RX;
-TM 1 Hz TOTAL_PACKETS_t R2L_TOTAL_VALID_PACKETS_RX;
-TM 1 Hz TOTAL_PACKETS_t R2L_TOTAL_INVALID_PACKETS_RX;
-TM 1 Hz RECEIVE_t R2L_RECEIVE_SN;
+TM 1 Hz INT_PACKETS_t R2L_Int_packets_tx;
+TM 1 Hz INT_BYTES_t R2L_Int_bytes_tx;
+TM 1 Hz TOTAL_PACKETS_t R2L_Total_packets_tx;
+TM 1 Hz INT_PACKETS_t R2L_Int_packets_rx;
+TM 1 Hz LATENCY_t R2L_Int_min_latency;
+TM 1 Hz LATENCY_t R2L_Int_mean_latency;
+TM 1 Hz LATENCY_t R2L_Int_max_latency;
+TM 1 Hz INT_BYTES_t R2L_Int_bytes_rx;
+TM 1 Hz TOTAL_PACKETS_t R2L_Total_valid_packets_rx;
+TM 1 Hz TOTAL_PACKETS_t R2L_Total_invalid_packets_rx;
+TM 1 Hz RECEIVE_t R2L_Receive_SN;
+
+TM 1 Hz UDP_Stat_t UDP_Status;
+TM 1 Hz UDP_Stat_t UDP_Stale;
+
+GROUP UDPgroup(L2R_Int_packets_tx, L2R_Int_bytes_tx, L2R_Total_packets_tx, L2R_Int_packets_rx, L2R_Int_min_latency, L2R_Int_mean_latency, L2R_Int_max_latency, L2R_Int_bytes_rx, L2R_Total_valid_packets_rx, L2R_Total_invalid_packets_rx, L2R_Receive_SN, R2L_Int_packets_tx, R2L_Int_bytes_tx, R2L_Total_packets_tx, R2L_Int_packets_rx, R2L_Int_min_latency, R2L_Int_mean_latency, R2L_Int_max_latency, R2L_Int_bytes_rx, R2L_Total_valid_packets_rx, R2L_Total_invalid_packets_rx, R2L_Receive_SN, UDP_Status, UDP_Stale) {
+
+  L2R_Int_packets_tx = UDPdiag.L2R.Int_packets_tx;
+  L2R_Int_bytes_tx = UDPdiag.L2R.Int_bytes_tx;
+  L2R_Total_packets_tx = UDPdiag.L2R.Total_packets_tx;
+  L2R_Int_packets_rx = UDPdiag.L2R.Int_packets_rx;
+  L2R_Int_min_latency = UDPdiag.L2R.Int_min_latency;
+  L2R_Int_mean_latency = UDPdiag.L2R.Int_mean_latency;
+  L2R_Int_max_latency = UDPdiag.L2R.Int_max_latency;
+  L2R_Int_bytes_rx = UDPdiag.L2R.Int_bytes_rx;
+  L2R_Total_valid_packets_rx = UDPdiag.L2R.Total_valid_packets_rx;
+  L2R_Total_invalid_packets_rx = UDPdiag.L2R.Total_invalid_packets_rx;
+  L2R_Receive_SN = UDPdiag.L2R.Receive_SN;
+  
+  R2L_Int_packets_tx = UDPdiag.R2L.Int_packets_tx;
+  R2L_Int_bytes_tx = UDPdiag.R2L.Int_bytes_tx;
+  R2L_Total_packets_tx = UDPdiag.R2L.Total_packets_tx;
+  R2L_Int_packets_rx = UDPdiag.R2L.Int_packets_rx;
+  R2L_Int_min_latency = UDPdiag.R2L.Int_min_latency;
+  R2L_Int_mean_latency = UDPdiag.R2L.Int_mean_latency;
+  R2L_Int_max_latency = UDPdiag.R2L.Int_max_latency;
+  R2L_Int_bytes_rx = UDPdiag.R2L.Int_bytes_rx;
+  R2L_Total_valid_packets_rx = UDPdiag.R2L.Total_valid_packets_rx;
+  R2L_Total_invalid_packets_rx = UDPdiag.R2L.Total_invalid_packets_rx;
+  R2L_Receive_SN = UDPdiag.R2L.Receive_SN;
+  
+  # UDP_Status = UDPdiag.Status;
+  UDP_Stale = UDP_obj->stale(255);
+  UDP_obj->synch();
+}
+
+TM 0 Hz mfc_t MFCtr, Synch;
