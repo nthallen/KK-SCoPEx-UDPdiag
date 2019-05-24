@@ -1,5 +1,10 @@
 #! /bin/bash
 
+function nl_error {
+  echo "interact: $*" >&2
+  exit 1
+}
+
 export Experiment=UDPlcl
 launch_error=''
 VERBOSE=''
@@ -26,6 +31,22 @@ function waitfor {
     let duration=duration-$decrement
   done
   return 1
+}
+
+function Debug {
+  name=$1
+  shift
+  [ -n "$launch_error" ] && return 1
+  [ -n "$VERBOSE" ] && msg "[DEBUG] Debug: $*"
+  program=$1
+  cygstart mintty gdb $program
+  if [ "$name" != "-" -a "$name" != "-TMC-" ]; then
+    [ "${name#/}" = "$name" ] && name="/var/run/linkeng/$Experiment/$name"
+    [ -n "$VERBOSE" ] &&
+      msg "[DEBUG] Debug: Waiting for $name"
+    waitfor $name 1 0
+  fi
+  return 0
 }
 
 function Launch {

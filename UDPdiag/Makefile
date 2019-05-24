@@ -2,6 +2,7 @@
 LDFLAGS = -L/usr/local/lib
 LIBS += -ldasio -lnl
 #CXXFLAGS += -fdiagnostics-color=always
+CXXFLAGS=-g
 
 all : UDPdiag
 

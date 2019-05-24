@@ -119,6 +119,7 @@ bool UDP_transmitter::parse_command(char *cmd, unsigned cmdlen) {
       case 'S':
         if (not_str("S:") || not_uint16(L2R_Packet_size)) {
           report_err("%s: Invalid S command syntax", iname);
+          consume(nc);
         } else {
           report_ok(nc);
         }
@@ -126,16 +127,19 @@ bool UDP_transmitter::parse_command(char *cmd, unsigned cmdlen) {
       case 'R':
         if (not_str("R:") || not_uint16(L2R_Packet_rate)) {
           report_err("%s: Invalid R command syntax", iname);
+          consume(nc);
         } else {
           report_ok(nc);
           int per_nsecs = L2R_Packet_rate == 0 ? 0 :
             (1000000000/(int)L2R_Packet_rate);
-          tmr->settime(0, per_nsecs);
+          tmr->settime(per_nsecs);
         }
         break;
       case 'Q':
+        report_ok(nc);
         return true;
       case 'X':
+        report_ok(nc);
         L2R_command_len = cmdlen-1;
         for (int i = 1; i < cmdlen; ++i) {
           L2R_command[i-1] = cmd[i];
@@ -166,11 +170,13 @@ bool UDP_transmitter::transmit(uint16_t n_pkts) {
     pkt->Int_bytes_rx = UDPdiag.R2L.Int_bytes_rx;
     pkt->Total_valid_packets_rx = UDPdiag.R2L.Total_valid_packets_rx;
     pkt->Total_invalid_packets_rx = UDPdiag.R2L.Total_invalid_packets_rx;
-    for (int j = 0; j < L2R_command_len; ++j) {
+    
+    int j;
+    for (j = 0; j < L2R_command_len; ++j) {
       pkt->Remainder[j] = L2R_command[j];
     }
     pkt->Transmit_timestamp = get_timestamp();
-    int j;
+    
     for (; j < pkt->Packet_size - 2; ++j) {
       pkt->Remainder[j] = (uint8_t)rand();
     }
@@ -190,6 +196,7 @@ bool UDP_transmitter::tm_sync() {
   Int_packets_tx = 0;
   Int_bytes_tx = 0;
   UDPdiag.L2R.Int_packets_tx = L2R_Int_packets_tx;
+  UDPdiag.L2R.Int_bytes_tx = L2R_Int_bytes_tx;
   UDPdiag.L2R.Total_packets_tx = L2R_Transmit_SN;
   return false;
 }
@@ -341,6 +348,7 @@ void UDP_tmr::set_transmitter(UDP_transmitter *tx) {
 }
 
 bool UDP_tmr::protocol_input() {
+  report_ok(nc);
   uint16_t n_pkts =
     (n_expirations < 60000) ? (uint16_t)n_expirations : 60000;
   return  tx ? tx->transmit(n_pkts) : false;
