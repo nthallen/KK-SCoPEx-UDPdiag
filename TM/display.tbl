@@ -37,7 +37,7 @@ R2L {
 }
 
 MFC {
-  MFCtr:              (MFCtr,5) (flttime,9);
+  MFCtr:              (MFCtr,5) (flttime,9) (UDP_Stale,3);
 }
 
 Table {

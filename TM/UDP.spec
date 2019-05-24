@@ -1,7 +1,7 @@
 tmcbase = base.tmc
 tmcbase = /usr/local/share/linkeng/flttime.tmc
 colbase = UDPdiag_col.tmc
-# cmdbase = root.cmd
+cmdbase = UDP.cmd
 # genuibase = udp.genui
 
 Module UDPdiag

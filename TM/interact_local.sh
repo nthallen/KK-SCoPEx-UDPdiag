@@ -71,7 +71,7 @@ memoname=/var/run/linkeng/$Experiment/memo
 # ls -l $memoname
 [ -e $memoname ] || {
   echo "Launching memo for $memoname"
-  cygstart mintty memo -o Bootstrap.log -l2 -V
+  cygstart mintty memo -o UDPdiag.log -l2 -V
   waitfor $memoname 2 || nl_error "Memo launch failed"
 }
 

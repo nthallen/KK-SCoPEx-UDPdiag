@@ -1,5 +1,4 @@
 %{
   #include "UDPdiag.h"
+  UDPdiag_t UDPdiag;
 %}
-
-UDPdiag_t UDPdiag;

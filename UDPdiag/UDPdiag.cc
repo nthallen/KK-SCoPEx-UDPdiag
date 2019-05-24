@@ -15,6 +15,7 @@
 #include "nl_assert.h"
 #include "oui.h"
 #include "crc16modbus.h"
+#include "dasio/tm_data_sndr.h"
 
 DAS_IO::AppID_t DAS_IO::AppID("UDPdiag", "UDP Performance Diagnostic Tool", "V1.0");
 
@@ -116,14 +117,14 @@ bool UDP_transmitter::parse_command(char *cmd, unsigned cmdlen) {
     nc = cmdlen;
     switch (buf[0]) {
       case 'S':
-        if (not_str(":") || not_uint16(L2R_Packet_size)) {
+        if (not_str("S:") || not_uint16(L2R_Packet_size)) {
           report_err("%s: Invalid S command syntax", iname);
         } else {
           report_ok(nc);
         }
         break;
       case 'R':
-        if (not_str(":") || not_uint16(L2R_Packet_rate)) {
+        if (not_str("R:") || not_uint16(L2R_Packet_rate)) {
           report_err("%s: Invalid R command syntax", iname);
         } else {
           report_ok(nc);
@@ -382,7 +383,13 @@ int main(int argc, char **argv) {
   ELoop.add_child(tx);
   UDP_receiver *rx = new UDP_receiver(rx_port, allow_remote_commands, tx);
   ELoop.add_child(rx);
+  
+  DAS_IO::TM_data_sndr *tm = new DAS_IO::TM_data_sndr("TM", "UDPdiag", (const char *)&UDPdiag, sizeof(UDPdiag));
+  ELoop.add_child(tm);
+  tm->connect();
+  
   UDP_cmd *cmd = new UDP_cmd(tx);
+  cmd->connect();
   ELoop.add_child(cmd);
   msg(MSG, "%s %s Starting",
     DAS_IO::AppID.fullname, DAS_IO::AppID.rev);
