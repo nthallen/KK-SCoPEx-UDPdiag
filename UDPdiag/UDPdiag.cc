@@ -170,6 +170,7 @@ bool UDP_transmitter::transmit(uint16_t n_pkts) {
     pkt->Int_mean_latency = UDPdiag.R2L.Int_mean_latency;
     pkt->Int_max_latency = UDPdiag.R2L.Int_max_latency;
     pkt->Int_bytes_rx = UDPdiag.R2L.Int_bytes_rx;
+    pkt->Int_bytes_tx = UDPdiag.L2R.Int_bytes_tx;
     pkt->Total_valid_packets_rx = UDPdiag.R2L.Total_valid_packets_rx;
     pkt->Total_invalid_packets_rx = UDPdiag.R2L.Total_invalid_packets_rx;
     
@@ -293,6 +294,7 @@ bool UDP_receiver::protocol_input() {
   msg(MSG_DBG(0), "Latency = %d, valid = %u, invalid = %u", latency,
       R2L_Total_valid_packets_rx, R2L_Total_invalid_packets_rx);
   UDPdiag.R2L.Receive_SN = pkt->Transmit_SN;
+  UDPdiag.R2L.Total_packets_tx = pkt->Transmit_SN;
   UDPdiag.L2R.Receive_SN = pkt->Receive_SN;
   R2L_Int_bytes_rx += pkt->Packet_size;
   UDPdiag.R2L.Int_packets_tx = pkt->Int_packets_tx;

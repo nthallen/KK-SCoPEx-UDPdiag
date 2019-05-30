@@ -32,6 +32,8 @@ typedef struct __attribute__((packed)) {
   uint32_t Int_max_latency;
   /** Total bytes received during last second */
   uint32_t Int_bytes_rx;
+  /** Interval bytes transmitted during last second */
+  uint32_t Int_bytes_tx;
   /** Total valid packets received */
   uint32_t Total_valid_packets_rx;
   /** Total invalid packets received */

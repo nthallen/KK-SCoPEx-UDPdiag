@@ -101,5 +101,5 @@ Launch      -TMC-  lgr -N `mlf_find LOG`
 Dispatch_nc -      UDPdispnc -a
 Launch      tm_gen UDPcol -v
 Launch      cmd    UDPsrvr -v
-Launch      -      UDPdiag -v -i 127.0.0.1 -r 10000 -t 10001
+Launch      -      UDPdiag -v -i 10.245.83.13 -r 10000 -t 10001
 Dispatch_nc -      UDPcltnc
