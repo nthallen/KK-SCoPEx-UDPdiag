@@ -273,6 +273,7 @@ bool UDP_receiver::protocol_input() {
   }
   
   int32_t latency = now - pkt->Transmit_timestamp;
+  msg(MSG_DBG(0), "Latency = %d", latency);
   if (R2L_Int_packets_rx == 0) {
     R2L_latencies = R2L_Int_min_latency = R2L_Int_max_latency = latency;
   } else {
@@ -286,6 +287,8 @@ bool UDP_receiver::protocol_input() {
     report_err("%s: Rx SN %u <= previous by %u", iname, pkt->Transmit_SN,
       UDPdiag.R2L.Receive_SN - pkt->Transmit_SN);
   }
+  msg(MSG_DBG(0), "Latency = %d, valid = %u, invalid = %u", latency,
+      R2L_Total_valid_packets_rx, R2L_Total_invalid_packets_rx);
   UDPdiag.R2L.Receive_SN = pkt->Transmit_SN;
   UDPdiag.L2R.Receive_SN = pkt->Receive_SN;
   R2L_Int_bytes_rx += pkt->Packet_size;
