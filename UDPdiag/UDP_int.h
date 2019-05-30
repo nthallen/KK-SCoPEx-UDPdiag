@@ -91,7 +91,7 @@ class UDP_receiver : public UDP_interface {
     uint32_t R2L_Total_packets_rx;
     uint32_t R2L_Total_valid_packets_rx;
     uint32_t R2L_Total_invalid_packets_rx;
-    int      R2L_Int_packets_rx;
+    uint32_t R2L_Int_packets_rx;
     int32_t  R2L_Int_min_latency;
     int32_t  R2L_Int_max_latency;
     uint32_t R2L_Int_bytes_rx;

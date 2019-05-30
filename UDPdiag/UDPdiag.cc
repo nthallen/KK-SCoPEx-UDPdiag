@@ -282,8 +282,9 @@ bool UDP_receiver::protocol_input() {
   }
   ++R2L_Int_packets_rx;
   ++R2L_Total_valid_packets_rx;
-  if (pkt->Transmit_SN <= UDPdiag.R2L.Receive_SN) {
-    report_err("%s: Rx SN <= previous by %d", iname, UDPdiag.R2L.Receive_SN - pkt->Transmit_SN);
+  if (UDPdiag.R2L.Receive_SN > 0 && pkt->Transmit_SN <= UDPdiag.R2L.Receive_SN) {
+    report_err("%s: Rx SN %u <= previous by %u", iname, pkt->Transmit_SN,
+      UDPdiag.R2L.Receive_SN - pkt->Transmit_SN);
   }
   UDPdiag.R2L.Receive_SN = pkt->Transmit_SN;
   UDPdiag.L2R.Receive_SN = pkt->Receive_SN;
