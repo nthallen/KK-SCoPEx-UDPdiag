@@ -1,12 +1,12 @@
 
 --------Frame Statistics-----------
 Major Frame: 2 minor frames, 1 Hz
-Minor Frame: 49 bytes, 2 Hz
+Minor Frame: 53 bytes, 2 Hz
 Effective Frame Dimensions:
-  2 Rows 49 Columns
+  2 Rows 53 Columns
   2 rows/sec
-  784 bits/sec
-  Data:  712 bits/sec  91 %
+  848 bits/sec
+  Data:  776 bits/sec  92 %
   Synch: 64 bits/sec  8 %
   Empty: 8 bits/sec  1 %
 -------End of Frame Statistics-----
@@ -14,8 +14,8 @@ Effective Frame Dimensions:
 
 --------PCM Definition-------------
 2/1 Hz 2 bytes Datum MFCtr (1,0,0,2)
-2/1 Hz 2 bytes Datum Synch (1,0,47,2)
-1/1 Hz 89 bytes Group UDPgroup (2,0,2,45) (2,1,2,44)
+2/1 Hz 2 bytes Datum Synch (1,0,51,2)
+1/1 Hz 97 bytes Group UDPgroup (2,0,2,49) (2,1,2,48)
 1/1 Hz 1 bytes Member UDP_Stale (2,0,2,1)
 1/1 Hz 4 bytes Member R2L_Receive_SN (2,0,3,4)
 1/1 Hz 4 bytes Member R2L_Total_invalid_packets_rx (2,0,7,4)
@@ -28,16 +28,20 @@ Effective Frame Dimensions:
 1/1 Hz 4 bytes Member R2L_Total_packets_tx (2,0,35,4)
 1/1 Hz 4 bytes Member R2L_Int_bytes_tx (2,0,39,4)
 1/1 Hz 4 bytes Member R2L_Int_packets_tx (2,0,43,4)
-1/1 Hz 4 bytes Member L2R_Receive_SN (2,1,2,4)
-1/1 Hz 4 bytes Member L2R_Total_invalid_packets_rx (2,1,6,4)
-1/1 Hz 4 bytes Member L2R_Total_valid_packets_rx (2,1,10,4)
-1/1 Hz 4 bytes Member L2R_Int_bytes_rx (2,1,14,4)
-1/1 Hz 4 bytes Member L2R_Int_max_latency (2,1,18,4)
-1/1 Hz 4 bytes Member L2R_Int_mean_latency (2,1,22,4)
-1/1 Hz 4 bytes Member L2R_Int_min_latency (2,1,26,4)
-1/1 Hz 4 bytes Member L2R_Int_packets_rx (2,1,30,4)
-1/1 Hz 4 bytes Member L2R_Total_packets_tx (2,1,34,4)
-1/1 Hz 4 bytes Member L2R_Int_bytes_tx (2,1,38,4)
-1/1 Hz 4 bytes Member L2R_Int_packets_tx (2,1,42,4)
+1/1 Hz 4 bytes Member L2R_Receive_SN (2,0,47,4)
+1/1 Hz 4 bytes Member L2R_Total_invalid_packets_rx (2,1,2,4)
+1/1 Hz 4 bytes Member L2R_Total_valid_packets_rx (2,1,6,4)
+1/1 Hz 4 bytes Member L2R_Int_bytes_rx (2,1,10,4)
+1/1 Hz 4 bytes Member L2R_Int_max_latency (2,1,14,4)
+1/1 Hz 4 bytes Member L2R_Int_mean_latency (2,1,18,4)
+1/1 Hz 4 bytes Member L2R_Int_min_latency (2,1,22,4)
+1/1 Hz 4 bytes Member L2R_Int_packets_rx (2,1,26,4)
+1/1 Hz 4 bytes Member L2R_Total_packets_tx (2,1,30,4)
+1/1 Hz 4 bytes Member L2R_Int_bytes_tx (2,1,34,4)
+1/1 Hz 4 bytes Member L2R_Int_packets_tx (2,1,38,4)
+1/1 Hz 2 bytes Member R2L_Packet_rate (2,1,42,2)
+1/1 Hz 2 bytes Member R2L_Packet_size (2,1,44,2)
+1/1 Hz 2 bytes Member L2R_Packet_rate (2,1,46,2)
+1/1 Hz 2 bytes Member L2R_Packet_size (2,1,48,2)
 -------End of PCM Definition-------
 

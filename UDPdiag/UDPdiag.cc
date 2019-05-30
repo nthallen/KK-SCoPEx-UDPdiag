@@ -195,6 +195,9 @@ bool UDP_transmitter::transmit(uint16_t n_pkts) {
 
 bool UDP_transmitter::tm_sync_too() {
   // msg(MSG_DBG(0), "Trans sync: Int_packets_tx: %d", L2R_Int_packets_tx);
+  
+  UDPdiag.L2R.Packet_size = L2R_Packet_size;
+  UDPdiag.L2R.Packet_rate = L2R_Packet_rate;
   L2R_Int_packets_tx = Int_packets_tx;
   L2R_Int_bytes_tx = Int_bytes_tx;
   Int_packets_tx = 0;
@@ -293,6 +296,10 @@ bool UDP_receiver::protocol_input() {
   }
   // msg(MSG_DBG(0), "Latency = %d, valid = %u, invalid = %u", latency,
       // R2L_Total_valid_packets_rx, R2L_Total_invalid_packets_rx);
+      
+  UDPdiag.R2L.Packet_size = pkt->Packet_size;
+  UDPdiag.R2L.Packet_rate = pkt->Packet_rate;
+  
   UDPdiag.R2L.Receive_SN = pkt->Transmit_SN;
   UDPdiag.R2L.Total_packets_tx = pkt->Transmit_SN;
   UDPdiag.L2R.Receive_SN = pkt->Receive_SN;

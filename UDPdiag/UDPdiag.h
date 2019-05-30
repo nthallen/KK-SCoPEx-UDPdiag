@@ -30,6 +30,8 @@
  * will be the Transmit_SN in the lastest packet received.
  */
 typedef struct __attribute__((packed)) {
+  uint16_t Packet_size;
+  uint16_t Packet_rate;
   uint32_t Int_packets_tx;
   uint32_t Int_bytes_tx;
   uint32_t Total_packets_tx;

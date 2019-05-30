@@ -1,6 +1,9 @@
 L2R {
   HBox { +-; Title: L2R; -+ };
   
+  PACKET_SIZE:        (L2R_Packet_size,5)      B;
+  PACKET_RATE:        (L2R_Packet_rate,5)      Hz;
+  
   >"INTERVAL"<;
   PACKETS_TX:         (L2R_Int_packets_tx,10);
   BYTES_TX:           (L2R_Int_bytes_tx,10);
@@ -19,6 +22,9 @@ L2R {
 
 R2L {
   HBox { +-; Title: R2L; -+ };
+  
+  PACKET_SIZE:        (R2L_Packet_size,5)      B;
+  PACKET_RATE:        (R2L_Packet_rate,5)      Hz;
   
   >"INTERVAL"<;
   PACKETS_TX:         (R2L_Int_packets_tx,10);

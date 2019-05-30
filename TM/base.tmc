@@ -10,6 +10,11 @@ TM typedef uint32_t TOTAL_PACKETS_t { text "%10u"; }
 TM typedef uint32_t TOTAL_BYTES_t { text "%10u"; }
 TM typedef uint32_t RECEIVE_t { text "%10u"; }
 
+TM 1 Hz mfc_t L2R_Packet_size;
+TM 1 Hz mfc_t L2R_Packet_rate;
+TM 1 Hz mfc_t R2L_Packet_size;
+TM 1 Hz mfc_t R2L_Packet_rate;
+
 TM 1 Hz INT_PACKETS_t L2R_Int_packets_tx;
 TM 1 Hz INT_BYTES_t L2R_Int_bytes_tx;
 TM 1 Hz TOTAL_PACKETS_t L2R_Total_packets_tx;
@@ -36,7 +41,12 @@ TM 1 Hz RECEIVE_t R2L_Receive_SN;
 
 TM 1 Hz UDP_Stat_t UDP_Stale;
 
-group UDPgroup(L2R_Int_packets_tx, L2R_Int_bytes_tx, L2R_Total_packets_tx, L2R_Int_packets_rx, L2R_Int_min_latency, L2R_Int_mean_latency, L2R_Int_max_latency, L2R_Int_bytes_rx, L2R_Total_valid_packets_rx, L2R_Total_invalid_packets_rx, L2R_Receive_SN, R2L_Int_packets_tx, R2L_Int_bytes_tx, R2L_Total_packets_tx, R2L_Int_packets_rx, R2L_Int_min_latency, R2L_Int_mean_latency, R2L_Int_max_latency, R2L_Int_bytes_rx, R2L_Total_valid_packets_rx, R2L_Total_invalid_packets_rx, R2L_Receive_SN, UDP_Stale) {
+group UDPgroup(L2R_Packet_size, L2R_Packet_rate, R2L_Packet_size, R2L_Packet_rate, L2R_Int_packets_tx, L2R_Int_bytes_tx, L2R_Total_packets_tx, L2R_Int_packets_rx, L2R_Int_min_latency, L2R_Int_mean_latency, L2R_Int_max_latency, L2R_Int_bytes_rx, L2R_Total_valid_packets_rx, L2R_Total_invalid_packets_rx, L2R_Receive_SN, R2L_Int_packets_tx, R2L_Int_bytes_tx, R2L_Total_packets_tx, R2L_Int_packets_rx, R2L_Int_min_latency, R2L_Int_mean_latency, R2L_Int_max_latency, R2L_Int_bytes_rx, R2L_Total_valid_packets_rx, R2L_Total_invalid_packets_rx, R2L_Receive_SN, UDP_Stale) {
+
+  L2R_Packet_size = UDPdiag.L2R.Packet_size;
+  L2R_Packet_rate = UDPdiag.L2R.Packet_rate;
+  R2L_Packet_size = UDPdiag.R2L.Packet_size;
+  R2L_Packet_rate = UDPdiag.R2L.Packet_rate;
 
   L2R_Int_packets_tx = UDPdiag.L2R.Int_packets_tx;
   L2R_Int_bytes_tx = UDPdiag.L2R.Int_bytes_tx;

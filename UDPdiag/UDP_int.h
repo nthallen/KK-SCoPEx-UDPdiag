@@ -12,6 +12,7 @@ void UDPdiag_init_options(int argc, char **argv);
 
 typedef struct __attribute__((packed)) {
   uint16_t Command_bytes;
+  /** Requested size of packet, in bytes */
   uint16_t Packet_size;
   uint16_t Packet_rate;
   /** Number of packets transmitted during last second */
