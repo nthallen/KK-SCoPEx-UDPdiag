@@ -155,8 +155,8 @@ bool UDP_transmitter::transmit(uint16_t n_pkts) {
   for (int i = 0; i < n_pkts; ++i) {
     if (!obuf_empty()) return false;
     // build the packet
-    msg(MSG_DBG(0), "Transmit Latencies: N:%d min:%d max:%d",
-      UDPdiag.R2L.Int_packets_rx, UDPdiag.R2L.Int_min_latency, UDPdiag.R2L.Int_max_latency);
+    // msg(MSG_DBG(0), "Transmit Latencies: N:%d min:%d max:%d",
+      // UDPdiag.R2L.Int_packets_rx, UDPdiag.R2L.Int_min_latency, UDPdiag.R2L.Int_max_latency);
     pkt->Command_bytes = L2R_command_len;
     pkt->Packet_size = sizeof(UDPdiag_packet) + L2R_command_len;
     if (pkt->Packet_size < L2R_Packet_size)
@@ -194,7 +194,7 @@ bool UDP_transmitter::transmit(uint16_t n_pkts) {
 }
 
 bool UDP_transmitter::tm_sync_too() {
-  msg(MSG_DBG(0), "Trans sync: Int_packets_tx: %d", L2R_Int_packets_tx);
+  // msg(MSG_DBG(0), "Trans sync: Int_packets_tx: %d", L2R_Int_packets_tx);
   L2R_Int_packets_tx = Int_packets_tx;
   L2R_Int_bytes_tx = Int_bytes_tx;
   Int_packets_tx = 0;
@@ -277,7 +277,7 @@ bool UDP_receiver::protocol_input() {
   }
   
   int32_t latency = now - pkt->Transmit_timestamp;
-  msg(MSG_DBG(0), "Latency = %d", latency);
+  // msg(MSG_DBG(0), "Latency = %d", latency);
   if (R2L_Int_packets_rx == 0) {
     R2L_latencies = R2L_Int_min_latency = R2L_Int_max_latency = latency;
   } else {
@@ -291,8 +291,8 @@ bool UDP_receiver::protocol_input() {
     report_err("%s: Rx SN %u <= previous by %u", iname, pkt->Transmit_SN,
       UDPdiag.R2L.Receive_SN - pkt->Transmit_SN);
   }
-  msg(MSG_DBG(0), "Latency = %d, valid = %u, invalid = %u", latency,
-      R2L_Total_valid_packets_rx, R2L_Total_invalid_packets_rx);
+  // msg(MSG_DBG(0), "Latency = %d, valid = %u, invalid = %u", latency,
+      // R2L_Total_valid_packets_rx, R2L_Total_invalid_packets_rx);
   UDPdiag.R2L.Receive_SN = pkt->Transmit_SN;
   UDPdiag.R2L.Total_packets_tx = pkt->Transmit_SN;
   UDPdiag.L2R.Receive_SN = pkt->Receive_SN;
@@ -303,6 +303,7 @@ bool UDP_receiver::protocol_input() {
   UDPdiag.L2R.Int_mean_latency = pkt->Int_mean_latency;
   UDPdiag.L2R.Int_max_latency = pkt->Int_max_latency;
   UDPdiag.L2R.Int_bytes_rx = pkt->Int_bytes_rx;
+  UDPdiag.R2L.Int_bytes_tx = pkt->Int_bytes_tx;
   UDPdiag.L2R.Total_valid_packets_rx = pkt->Total_valid_packets_rx;
   UDPdiag.L2R.Total_invalid_packets_rx = pkt->Total_invalid_packets_rx;
   
@@ -316,8 +317,8 @@ bool UDP_receiver::protocol_input() {
 bool UDP_receiver::tm_sync() {
   // Update UDPdiag struct with current readings,
   // then clear our interval counters
-  msg(MSG_DBG(0), "RcvSync Latencies: N:%d min:%d max:%d",
-    R2L_Int_packets_rx, R2L_Int_min_latency, R2L_Int_max_latency);
+  // msg(MSG_DBG(0), "RcvSync Latencies: N:%d min:%d max:%d",
+    // R2L_Int_packets_rx, R2L_Int_min_latency, R2L_Int_max_latency);
   UDPdiag.R2L.Int_packets_rx = R2L_Int_packets_rx;
   UDPdiag.R2L.Int_min_latency = R2L_Int_min_latency;
   UDPdiag.R2L.Int_max_latency = R2L_Int_max_latency;
