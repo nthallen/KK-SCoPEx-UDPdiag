@@ -58,9 +58,8 @@ class UDP_transmitter : public UDP_interface {
       UDP_tmr *tmr);
     bool parse_command(char *cmd, unsigned cmdlen);
     bool transmit(uint16_t n_pkts);
-    // inline void set_receiver(UDP_receiver *rx) { this->rx = rx; }
+    bool tm_sync_too();
   protected:
-    bool tm_sync();
     void crc_set();
     UDPdiag_packet *pkt;
     uint32_t L2R_Int_packets_tx;
