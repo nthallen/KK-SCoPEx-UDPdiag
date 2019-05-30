@@ -330,7 +330,7 @@ bool UDP_receiver::tm_sync() {
   UDPdiag.R2L.Int_min_latency = R2L_Int_min_latency;
   UDPdiag.R2L.Int_max_latency = R2L_Int_max_latency;
   UDPdiag.R2L.Int_mean_latency = R2L_Int_packets_rx ?
-    R2L_latencies/R2L_Int_packets_rx : 0;
+    R2L_latencies/((int32_t)R2L_Int_packets_rx) : 0;
   UDPdiag.R2L.Int_bytes_rx = R2L_Int_bytes_rx;
   UDPdiag.R2L.Total_valid_packets_rx = R2L_Total_valid_packets_rx;
   UDPdiag.R2L.Total_invalid_packets_rx = R2L_Total_invalid_packets_rx;
